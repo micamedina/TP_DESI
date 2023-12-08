@@ -70,6 +70,6 @@ public class VuelosProgramarController {
 	    }
 
 		vueloServicio.guardarVuelo(vuelo);
-		return "redirect:/vuelos/agregar?exito";
+		return "vuelosProgramar";
 	}
 }
