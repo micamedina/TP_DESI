@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "vuelos")
-public class Vuelos {
+public class Vuelo {
 	
 
 	@Id
@@ -37,6 +37,13 @@ public class Vuelos {
 	@ManyToOne
     @JoinColumn(name = "avion_id", nullable = false)
     private Avion avion;
+	
+	@Column(name = "estado", nullable = false)
+	private String estado;
+	
+	public Vuelo() {
+        this.estado = "NORMAL"; 
+    }
 	
 	public Ciudad getOrigen() {
 		return origen;
@@ -86,9 +93,11 @@ public class Vuelos {
 	public void setNroVuelo(String nombre) {
 		this.nroVuelo = nombre;
 	}
-	
-	
-	
-	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	
 }
