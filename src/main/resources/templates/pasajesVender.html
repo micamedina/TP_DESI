@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Programar Vuelo</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body class="container mt-5">
+
+	<h2>Vender pasajes</h2>
+
+	<form action="/pasajes/buscar" method="post" th:object="${persona}">
+		<div th:if="${#fields.hasErrors('dni')}" class="alert alert-danger">
+			<span th:errors="*{dni}"></span>
+		</div>
+		<label for="numero">Ingrese un DNI:</label>
+		<input type="text" th:field="*{dni}" pattern="[0-9]+" title="Ingrese solo números" class="form-control"
+			required />
+		<button type="submit">Enviar</button>
+	</form>
+
+	<th:block th:if="${personaEncontrada}">
+		<table class="table mt-4">
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Pasaporte</th>
+					<th>Fecha de Nacimiento</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td th:text="${persona.dni}"></td>
+					<td th:text="${persona.nombre}"></td>
+					<td th:text="${persona.apellido}"></td>
+					<td th:text="${persona.nroPasaporte}"></td>
+					<td th:text="${#dates.format(persona.fechaNacimiento, 'dd-MM-yyyy')}"></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Datos del vuelo</h3>
+
+		<select th:field="*{vuelos}" class="form-control">
+			<option value="" disabled selected>Seleccionar opción</option>
+			<option th:value="null" text="Seleccione una opción"></option>
+			<option th:each="v : ${vuelos}" th:value="${v.id}"
+				th:text="${v.id + ' - ' + v.origen.nombre + ' a ' + v.destino.nombre + ' - ' + v.fechaHoraPartida + ' - $' + v.precioPasaje}">
+			</option>
+		</select>
+
+
+		<select id="seleccionaAsiento" class="form-control">
+			<option value="asiento1">Asiento 1</option>
+			<option value="asiento2">Asiento 2</option>
+		</select>
+	</th:block>
+
+</body>
+
+</html>

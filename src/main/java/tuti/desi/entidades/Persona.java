@@ -17,11 +17,12 @@ public class Persona {
 	
 	private String apellido;
 	
+	private String email;
+	
+	private int nroPasaporte;
+
 	private Date fechaNacimiento;
 	
-	/**
-	 * propiedad utilizada por la capa de presentacion para saber si es una entidad ya persistida (la estoy actualizando) o es nueva, ya que si id es ingresado por el usuario, no puede ser usado como criterio para saber si fue persistida o no.
-	 */
 	@Transient
 	private Boolean editando=false;
 	
@@ -65,5 +66,18 @@ public class Persona {
 	public void setEditando(Boolean editando) {
 		this.editando = editando;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public int getNroPasaporte() {
+		return nroPasaporte;
+	}
+	public void setNroPasaporte(int nroPasaporte) {
+		this.nroPasaporte = nroPasaporte;
+	}
+	
 	
 }
