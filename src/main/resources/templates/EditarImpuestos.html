@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Tasas e Impuestos</title>
+</head>
+<body>
+
+    <h2>Edición de Tasas e Impuestos</h2>
+
+    <form th:action="@{/tasas/guardar}" th:object="${tasasFormulario}" method="post">
+        <label for="iva">IVA (%):</label>
+        <input type="number" th:field="*{iva}" min="0" max="100" step="0.01" required>
+
+        <label for="tasaNacional">Tasa Aeroportuaria Nacional ($):</label>
+        <input type="number" th:field="*{tasaNacional}" min="0" step="0.01" required>
+
+        <label for="tasaInternacional">Tasa Aeroportuaria Internacional (USD):</label>
+        <input type="number" th:field="*{tasaInternacional}" min="0" step="0.01" required>
+
+        <label for="cotizacionDolar">Cotización del Dólar ($):</label>
+        <input type="number" th:field="*{cotizacionDolar}" min="0" step="0.01" required>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+</body>
+</html>
+
