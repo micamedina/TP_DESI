@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Agrega otros enlaces de estilos o scripts si los necesitas -->
+</head>
+
 <body>
 
-
-
-	<div class="starter-template">
-		<h1>Ejemplo Spring Boot Web Thymeleaf </h1>
-		<h2>
-			<span th:text="'Bienvenido'"></span>
-		</h2>
-	</div>
-	<a th:href="personasBuscar">Personas</a>
-	<a th:href="ciudadesBuscar">Ciudades</a>
-	<a th:href="ciudadesBuscar">Prueba</a>
-	<a th:href="@{/vuelos/programar}">Programar Vuelo</a>
-	<a th:href="@{/pasajes/vender}">Vender pasaje</a>
+    <div class="starter-template">
+        <h1>Ejemplo Spring Boot Web Thymeleaf </h1>
+        <h2>
+            <span th:text="'Bienvenido'"></span>
+        </h2>
+    </div>
+    <a class="btn btn-primary" th:href="personasBuscar">Personas</a>
+    <a class="btn btn-secondary" th:href="ciudadesBuscar">Ciudades</a>
+    <a class="btn btn-success" th:href="ciudadesBuscar">Prueba</a>
+    <a class="btn btn-info" th:href="@{/vuelos/programar}">Programar Vuelo</a>
+    <a class="btn btn-warning" th:href="@{/pasajes/vender}">Vender pasaje</a>
 
 </body>
 
