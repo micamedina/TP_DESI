@@ -27,7 +27,7 @@ public class PersonaServiceImpl implements PersonaService {
 		
 		return repo.findAll();
 	}
-
+	
 	@Override
 	public List<Persona> filter(PersonasBuscarForm filter) throws Excepcion {
 		
@@ -36,8 +36,6 @@ public class PersonaServiceImpl implements PersonaService {
 			throw new Excepcion("Es necesario al menos un filtro");
 		else
 			return repo.findByNombreOrIdCiudad(filter.getNombre(),filter.getDni(),filter.getIdCiudadSeleccionada());
-		
-		
 		
 	}
 
