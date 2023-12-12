@@ -1,10 +1,6 @@
 package tuti.desi.entidades;
 
-
-
-
-
-public class tasasForm {
+public class Tasa {
 
     private double iva;
     private double tasaNacional;
