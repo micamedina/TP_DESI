@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tasas</title>
+</head>
+<body>
+
+    <h2>Lista de Tasas</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Iva</th>
+                <th>Tasa Nacional</th>
+                <th>Tasa Internacional</th>
+                <th>Cotización del Dólar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tasa : ${tasas}">
+                <td th:text="${tasa.iva}"></td>
+                <td th:text="${tasa.tasaNacional}"></td>
+                <td th:text="${tasa.tasaInternacional}"></td>
+                <td th:text="${tasa.cotizacionDolar}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
