@@ -15,4 +15,3 @@ public interface TasaRepo extends JpaRepository<Tasa, Long> {
 	
 }
 
-

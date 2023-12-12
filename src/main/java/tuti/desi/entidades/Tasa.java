@@ -1,44 +1,58 @@
 package tuti.desi.entidades;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Tasa {
 
-    private double iva;
-    private double tasaNacional;
-    private double tasaInternacional;
-    private double cotizacionDolar;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-   
+	private double iva;
+	private double tasaNacional;
+	private double tasaInternacional;
+	private double cotizacionDolar;
 
-    public double getIva() {
-        return iva;
-    }
 
-    public void setIva(double iva) {
-        this.iva = iva;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public double getTasaNacional() {
-        return tasaNacional;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setTasaNacional(double tasaNacional) {
-        this.tasaNacional = tasaNacional;
-    }
 
-    public double getTasaInternacional() {
-        return tasaInternacional;
-    }
+	public double getIva() {
+		return iva;
+	}
 
-    public void setTasaInternacional(double tasaInternacional) {
-        this.tasaInternacional = tasaInternacional;
-    }
+	public void setIva(double iva) {
+		this.iva = iva;
+	}
 
-    public double getCotizacionDolar() {
-        return cotizacionDolar;
-    }
+	public double getTasaNacional() {
+		return tasaNacional;
+	}
 
-    public void setCotizacionDolar(double cotizacionDolar) {
-        this.cotizacionDolar = cotizacionDolar;
-    }
+	public void setTasaNacional(double tasaNacional) {
+		this.tasaNacional = tasaNacional;
+	}
+
+	public double getTasaInternacional() {
+		return tasaInternacional;
+	}
+
+	public void setTasaInternacional(double tasaInternacional) {
+		this.tasaInternacional = tasaInternacional;
+	}
+
+	public double getCotizacionDolar() {
+		return cotizacionDolar;
+	}
+
+	public void setCotizacionDolar(double cotizacionDolar) {
+		this.cotizacionDolar = cotizacionDolar;
+	}
 }
-

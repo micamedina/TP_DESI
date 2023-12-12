@@ -13,6 +13,7 @@
     <table>
         <thead>
             <tr>
+				
                 <th>Iva</th>
                 <th>Tasa Nacional</th>
                 <th>Tasa Internacional</th>
@@ -20,7 +21,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="tasa : ${tasas}">
+            <tr th object "${tasas}" th:each="tasa : ${tasas}">
+				
                 <td th:text="${tasa.iva}"></td>
                 <td th:text="${tasa.tasaNacional}"></td>
                 <td th:text="${tasa.tasaInternacional}"></td>
