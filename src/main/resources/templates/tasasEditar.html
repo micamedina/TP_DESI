@@ -2,34 +2,55 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tasas</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<title>Lista de Tasas</title>
 </head>
+
 <body>
 
-    <h2>Lista de Tasas</h2>
+	<div th:if="${error}" class="alert alert-danger">
+		<p th:text="${error}"></p>
+	</div>
 
-    <table>
-        <thead>
-            <tr>
+	<form th:action="@{/tasas/editar}" th:object="${tasa}" method="post">
+		<div class="row mt-4">
+			<div class="col-md-6 offset-md-3">
+				<input type="hidden" th:field="${tasa.id}" />
+				<!-- Iva -->
+				<div class="form-group">
+					<label for="iva">Iva:</label>
+					<input type="text" class="form-control" id="iva" th:field="*{iva}">
+				</div>
+				<!-- Tasa Nacional -->
+				<div class="form-group">
+					<label for="tasaNacional">Tasa Nacional:</label>
+					<input type="text" class="form-control" id="tasaNacional" th:field="*{tasaNacional}">
+				</div>
+				<!-- Tasa Internacional -->
+				<div class="form-group">
+					<label for="tasaInternacional">Tasa Internacional:</label>
+					<input type="text" class="form-control" id="tasaInternacional" th:field="*{tasaInternacional}">
+				</div>
+				<!-- Cotización del Dólar -->
+				<div class="form-group">
+					<label for="cotizacionDolar">Cotización del Dólar:</label>
+					<input type="text" class="form-control" id="cotizacionDolar" th:field="*{cotizacionDolar}">
+				</div>
+
+				<button type="submit" class="btn btn-primary btn-block">Enviar formulario</button>
 				
-                <th>Iva</th>
-                <th>Tasa Nacional</th>
-                <th>Tasa Internacional</th>
-                <th>Cotización del Dólar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th object "${tasas}" th:each="tasa : ${tasas}">
-				
-                <td th:text="${tasa.iva}"></td>
-                <td th:text="${tasa.tasaNacional}"></td>
-                <td th:text="${tasa.tasaInternacional}"></td>
-                <td th:text="${tasa.cotizacionDolar}"></td>
-            </tr>
-        </tbody>
-    </table>
+				<a class="btn btn-secondary btn-block mt-2" th:href="@{/}">Volver al índice</a>
+			</div>
+		</div>
+	</form>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

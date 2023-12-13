@@ -5,24 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- Agrega otros enlaces de estilos o scripts si los necesitas -->
+    <title>Ejemplo Spring Boot Web Thymeleaf</title>
 </head>
 
 <body>
 
-    <div class="starter-template">
-        <h1>Ejemplo Spring Boot Web Thymeleaf </h1>
-        <h2>
-            <span th:text="'Bienvenido'"></span>
-        </h2>
+    <div class="container mt-5">
+        <div class="starter-template text-center">
+            <h1 class="display-4">Ejemplo Spring Boot Web Thymeleaf</h1>
+            <p class="lead">Bienvenido</p>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-3 text-center">
+                <a class="btn btn-primary btn-lg btn-block mb-2" th:href="personasBuscar">Personas</a>
+                <a class="btn btn-secondary btn-lg btn-block mb-2" th:href="ciudadesBuscar">Ciudades</a>
+                <a class="btn btn-success btn-lg btn-block mb-2" th:href="ciudadesBuscar">Prueba</a>
+                <a class="btn btn-info btn-lg btn-block mb-2" th:href="@{/vuelos/programar}">Programar Vuelo</a>
+                <a class="btn btn-warning btn-lg btn-block mb-2" th:href="@{/pasajes/vender}">Vender pasaje</a>
+                <a class="btn btn-danger btn-lg btn-block mb-2" th:href="@{/tasas/mostrar}">Tasas e Impuestos</a>
+            </div>
+        </div>
     </div>
-    <a class="btn btn-primary" th:href="personasBuscar">Personas</a>
-    <a class="btn btn-secondary" th:href="ciudadesBuscar">Ciudades</a>
-    <a class="btn btn-success" th:href="ciudadesBuscar">Prueba</a>
-    <a class="btn btn-info" th:href="@{/vuelos/programar}">Programar Vuelo</a>
-    <a class="btn btn-warning" th:href="@{/pasajes/vender}">Vender pasaje</a>
-    <a class="btn btn-warning" th:href="tasasEditar">Tasas e Impuestos</a>
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 
 </html>
+
