@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Ticket</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body class="container mt-5">
+
+	<h2>Ticket</h2>
+
+	<div>
+		<form action="/pasajes/ver-asientos/ticket-compra" method="post">
+
+			<p>Datos del comprador</p>
+			<p>Nombre y Apellido: <span th:text="${persona.nombre + ' ' + persona.apellido}"></span></p>
+			<p>Dni: <span th:text="${persona.dni}"></span></p>
+			<p>Pasaporte: <span th:text="${persona.nroPasaporte}"></span></p>
+
+			<p>Datos del Vuelo</p>
+			<p>Vuelo Destino: <span th:text="${ciudadDestino.nombre}"></span></p>
+			<p>Vuelo Origen: <span th:text="${ciudadOrigen.nombre}"></span></p>
+			<p>Horario: <span th:text="${vuelo.fechaHoraPartida}"></span></p>
+			<p>Asiento: <span th:text="${asiento.numero}"></span></p>
+			<p>Precio pasaje: $ <span th:text="${vuelo.precioPasaje}"></span></p>
+			<p>Iva: $ <span th:text="${ivaPasaje}"></span></p>
+			<p>Tasa: $ <span th:text="${tasaPortuaria}"></span></p>
+
+			<p>Precio total: $ <span th:text="${vuelo.precioPasaje + ivaPasaje + tasaPortuaria }"></span></p>
+
+		</form>
+
+	</div>
+
+</body>
+
+</html>

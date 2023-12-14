@@ -19,7 +19,7 @@
 		<label for="numero">Ingrese un DNI:</label>
 		<input type="text" th:field="*{dni}" pattern="[0-9]+" title="Ingrese solo números" class="form-control"
 			required />
-		<button type="submit">Enviar</button>
+		<button type="submit" class="btn btn-primary mt-2">Enviar</button>
 	</form>
 
 	<th:block th:if="${personaEncontrada}">
@@ -44,22 +44,20 @@
 			</tbody>
 		</table>
 
-		<h3>Datos del vuelo</h3>
-
-		<select th:field="*{vuelos}" class="form-control">
-			<option value="" disabled selected>Seleccionar opción</option>
-			<option th:value="null" text="Seleccione una opción"></option>
-			<option th:each="v : ${vuelos}" th:value="${v.id}"
-				th:text="${v.id + ' - ' + v.origen.nombre + ' a ' + v.destino.nombre + ' - ' + v.fechaHoraPartida + ' - $' + v.precioPasaje}">
-			</option>
-		</select>
-
-
-		<select id="seleccionaAsiento" class="form-control">
-			<option value="asiento1">Asiento 1</option>
-			<option value="asiento2">Asiento 2</option>
-		</select>
 	</th:block>
+
+	<div th:if="${personaEncontrada}">
+		<form action="/pasajes/ver-asientos" method="post">
+			<label for="idVuelo">Seleccione un vuelo:</label>
+			<select name="idVuelo" class="form-control" required>
+				<option th:each="vuelo : ${vuelos}" th:value="${vuelo.id}"
+					th:text="${vuelo.nroVuelo + ' - ' + vuelo.origen.nombre + ' a ' + vuelo.destino.nombre + ' - Precio: ' + vuelo.precioPasaje}">
+				</option>
+			</select>
+			<button type="submit" class="btn btn-primary mt-2">Ver Asientos</button>
+		</form>
+	</div>
+
 
 </body>
 

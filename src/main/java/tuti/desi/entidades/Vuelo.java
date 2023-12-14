@@ -1,6 +1,7 @@
 package tuti.desi.entidades;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -8,7 +9,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "vuelos")
 public class Vuelo {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,17 @@ public class Vuelo {
 	@Column(name = "estado", nullable = false)
 	private String estado;
 	
+	@OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL)
+    private List<Asiento> asientos;
+	
+	public List<Asiento> getAsientos() {
+		return asientos;
+	}
+
+	public void setAsientos(List<Asiento> asientos) {
+		this.asientos = asientos;
+	}
+
 	public Vuelo() {
         this.estado = "NORMAL"; 
     }

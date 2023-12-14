@@ -12,5 +12,4 @@ public interface AvionService {
 
     void guardarAvion(Avion avion);
 
-    // Puedes agregar otros métodos según tus necesidades
 }
