@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Busqueda de Vuelos</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			margin: 20px;
+		}
+
+		h2 {
+			color: #333;
+		}
+
+		form {
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+
+		input,
+		select {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 16px;
+			width: 100%;
+		}
+
+		h5.warning {
+			color: #ff0000;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Búsqueda de Vuelos</h2>
+	<h4>Ingrese los datos requeridos debajo para realizar su consulta:</h4>
+	<form action="/vuelos/mostrar" method="post">
+		<label for="fecha">Fecha:</label>
+		<h5 th:class="${#fields.hasErrors('fecha')} ? 'warning' : ''">Este dato es obligatorio para realizar la
+			busqueda.</h5>
+		<input type="date" id="fecha" name="fecha" required>
+
+		<label for="origen">Origen:</label>
+		<select id="origen" name="origen" th:class="${#fields.hasErrors('origen')} ? 'warning' : ''">
+			<option th:each="ciudad : ${ciudades}" th:value="${ciudad}" th:text="${ciudad}"></option>
+		</select>
+
+		<label for="destino">Destino:</label>
+		<select id="destino" name="destino" th:class="${#fields.hasErrors('destino')} ? 'warning' : ''">
+			<option th:each="ciudad : ${ciudades}" th:value="${ciudad}" th:text="${ciudad}"></option>
+		</select>
+
+		<label for="tipoVuelo">Tipo de Vuelo:</label>
+		<select id="tipoVuelo" name="tipoVuelo">
+			<option value="">Seleccionar...</option>
+			<option value="Nacional">Nacional</option>
+			<option value="Internacional">Internacional</option>
+		</select>
+
+		<button type="submit">Buscar Vuelos</button>
+	</form>
+</body>
+
+</html>

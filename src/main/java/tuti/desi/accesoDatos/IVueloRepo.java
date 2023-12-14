@@ -1,6 +1,8 @@
 package tuti.desi.accesoDatos;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.Vuelo;
 
 import java.time.LocalDateTime;
@@ -18,6 +20,18 @@ public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
             LocalDateTime fechaHoraPartidaDesde,
             LocalDateTime fechaHoraPartidaHasta
     );
+
+	List<Vuelo> findByOrigenAndDestinoAndTipoVueloAndFechaHoraPartidaBetween(Ciudad origen, Ciudad destino,
+			String tipoVuelo, LocalDateTime atStartOfDay, LocalDateTime atTime);
+
+	List<Vuelo> findByOrigenAndDestinoAndFechaHoraPartidaBetween(Ciudad origen, Ciudad destino,
+			LocalDateTime atStartOfDay, LocalDateTime atTime);
+
+	List<Vuelo> findByOrigenAndFechaHoraPartidaBetween(Ciudad origen, LocalDateTime atStartOfDay, LocalDateTime atTime);
+
+	List<Vuelo> findByFechaHoraPartidaBetween(LocalDateTime atStartOfDay, LocalDateTime atTime);
+
+	
 
     
 }
