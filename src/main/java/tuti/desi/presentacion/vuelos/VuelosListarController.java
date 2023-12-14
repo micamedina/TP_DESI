@@ -49,7 +49,7 @@ public class VuelosListarController {
 	
 	
 	@PostMapping("/mostrar")
-	public String mostrarVuelos(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+	public String mostrarVuelosListadosYFiltrados(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
 	                             @RequestParam(required = false) String origen,
 	                             @RequestParam(required = false) String destino,
 	                             @RequestParam(required = false) String tipoVuelo,
