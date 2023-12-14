@@ -14,10 +14,12 @@ import jakarta.validation.Valid;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.Provincia;
+import tuti.desi.entidades.Asiento;
 import tuti.desi.entidades.Avion;
 import tuti.desi.servicios.AvionService;
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.VueloService;
+import tuti.desi.servicios.AsientoService;
 
 import java.util.List;
 
@@ -34,6 +36,9 @@ public class VuelosProgramarController {
 	@Autowired
 	private CiudadService ciudadServicio;
 
+	@Autowired
+	private AsientoService asientoService;
+	
 	@GetMapping("/programar")
 	public String mostrarFormularioVuelo(Model model) {
 		model.addAttribute("vuelo", new Vuelo());
@@ -70,6 +75,21 @@ public class VuelosProgramarController {
 	    }
 
 		vueloServicio.guardarVuelo(vuelo);
+		
+		int filas = vuelo.getAvion().getCantidadFilas();
+		int asientosPorFila = vuelo.getAvion().getAsientosPorFila();
+		int totalAsientos = filas*asientosPorFila;
+		
+	     for (int i = 1; i <= totalAsientos ; i++) {
+	                Asiento asiento = new Asiento();
+	                asiento.setVuelo(vuelo);
+	                asiento.setNumero(i);
+	                asiento.setDisponible(true);
+	                asientoService.guardarAsiento(asiento);
+	        
+	        }
+		
+		
 		return "vuelosProgramar";
 	}
 }

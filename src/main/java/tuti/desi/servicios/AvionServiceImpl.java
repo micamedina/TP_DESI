@@ -28,5 +28,4 @@ public class AvionServiceImpl implements AvionService {
         avionRepo.save(avion);
     }
 
-    // Puedes implementar otros métodos según tus necesidades
 }

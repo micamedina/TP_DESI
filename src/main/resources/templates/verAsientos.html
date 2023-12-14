@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Ver Asientos</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body class="container mt-5">
+
+	<h2>Asientos Disponibles - Vuelo <span th:text="${vuelo.nroVuelo}"></span></h2>
+
+	<div th:if="${asientos}">
+		<form action="/pasajes/ver-asientos/ticket-compra" method="post">
+
+			<label for="idAsiento">Seleccione un asiento:</label>
+			<select name="idAsiento" class="form-control" required>
+				<option th:each="asiento : ${asientos}" th:if="${asiento.disponible}" th:value="${asiento.id}" th:text="${asiento.numero}"></option>
+			</select>
+
+			<button type="submit" class="btn btn-primary mt-2">Seleccionar Asiento</button>
+		</form>
+	</div>
+
+</body>
+
+</html>
