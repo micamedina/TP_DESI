@@ -31,10 +31,22 @@ public class VuelosListarController {
 	@GetMapping("/listar")
 	public String listarVuelos(Model model,
 	        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-	        @RequestParam(required = false) String origen, @RequestParam(required = false) String destino,
+	        @RequestParam(required = false) Ciudad origen, @RequestParam(required = false) Ciudad destino,
 	        @RequestParam(required = false) String tipoVuelo) {
+		
+		
+		// Obtener los vuelos programados para la fecha, origen, destino y tipo de vuelo dados
+	    List<Vuelo> vuelosProgramados = vueloService.obtenerVuelosProgramados(fecha, origen, destino, tipoVuelo);
 
-	    model.addAttribute("vuelos", vueloService.obtenerTodosLosVuelos());
+	    
+
+	    // Agregar vuelos y ciudades al modelo
+	    model.addAttribute("vuelos", vuelosProgramados);
+	
+	    
+	    
+	    
+		//model.addAttribute("vuelos", vueloService.obtenerTodosLosVuelos());
 
 	    List<Ciudad> ciudades = ciudadService.getAll();
 	    List<String> nombresCiudades = new ArrayList<>();
@@ -42,7 +54,7 @@ public class VuelosListarController {
 	        nombresCiudades.add(ciudad.getNombre());
 	    }
 	    model.addAttribute("ciudades", nombresCiudades);
-
+	    
 	    return "listaVuelos";
 	}
 
@@ -50,12 +62,12 @@ public class VuelosListarController {
 	
 	@PostMapping("/mostrar")
 	public String mostrarVuelosListadosYFiltrados(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-	                             @RequestParam(required = false) String origen,
-	                             @RequestParam(required = false) String destino,
+	                             @RequestParam(required = false) Ciudad origen,
+	                             @RequestParam(required = false) Ciudad destino,
 	                             @RequestParam(required = false) String tipoVuelo,
 	                             Model model) {
 
-	    List<Vuelo> vuelos = vueloService.filter(null, null, tipoVuelo, fecha);
+	    List<Vuelo> vuelos = vueloService.filter(origen, destino, tipoVuelo, fecha);
 	    model.addAttribute("vuelos", vuelos);
 
 	    List<Ciudad> ciudades = ciudadService.getAll();

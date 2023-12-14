@@ -17,6 +17,9 @@ public interface VueloService {
     
     public boolean existeVueloFechaAvion(Vuelo vuelo);
     
+    
+    public List<Vuelo> obtenerVuelosProgramados(LocalDate fecha, Ciudad origen, Ciudad destino, String tipoVuelo);
+    
     List <Vuelo> filter(Ciudad origen, Ciudad destino, String tipoVuelo, LocalDate fecha);
 
 }

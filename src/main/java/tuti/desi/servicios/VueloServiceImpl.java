@@ -71,6 +71,17 @@ public class VueloServiceImpl implements VueloService {
 		return vuelos;
 	}
 
+	@Override
+	public List<Vuelo> obtenerVuelosProgramados(LocalDate fecha, Ciudad origen, Ciudad destino, String tipoVuelo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
+	public List<Vuelo> obtenerVuelosProgramados(LocalDate fecha, Ciudad origen, Ciudad destino, String tipoVuelo) {
+		return IVueloRepo.findByFechaAndOrigenAndDestinoAndTipoVuelo(fecha, origen, destino, tipoVuelo);
+	}
+	*/
 
 	
 
