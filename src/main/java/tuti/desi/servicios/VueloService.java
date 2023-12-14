@@ -2,6 +2,8 @@ package tuti.desi.servicios;
 
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.Vuelo;
+import tuti.desi.presentacion.vuelos.VuelosListarForm;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,9 +19,7 @@ public interface VueloService {
     
     public boolean existeVueloFechaAvion(Vuelo vuelo);
     
+    public List<Vuelo> filter(VuelosListarForm filter);
     
-    public List<Vuelo> obtenerVuelosProgramados(LocalDate fecha, Ciudad origen, Ciudad destino, String tipoVuelo);
-    
-    List <Vuelo> filter(Ciudad origen, Ciudad destino, String tipoVuelo, LocalDate fecha);
 
 }

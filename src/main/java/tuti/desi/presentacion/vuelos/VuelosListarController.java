@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.Vuelo;
+import tuti.desi.presentacion.cuidades.CiudadesBuscarForm;
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.VueloService;
 import java.time.LocalDate;
@@ -23,64 +27,46 @@ public class VuelosListarController {
 
 	@Autowired
 	private VueloService vueloService;
-	
+
 	@Autowired
 	private CiudadService ciudadService;
 
-	
 	@GetMapping("/listar")
-	public String listarVuelos(Model model,
-	        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-	        @RequestParam(required = false) Ciudad origen, @RequestParam(required = false) Ciudad destino,
-	        @RequestParam(required = false) String tipoVuelo) {
-		
-		
-		// Obtener los vuelos programados para la fecha, origen, destino y tipo de vuelo dados
-	    List<Vuelo> vuelosProgramados = vueloService.obtenerVuelosProgramados(fecha, origen, destino, tipoVuelo);
+	public String listarVuelos(Model model) {
 
-	    
+		VuelosListarForm form = new VuelosListarForm();
 
-	    // Agregar vuelos y ciudades al modelo
-	    model.addAttribute("vuelos", vuelosProgramados);
-	
-	    
-	    
-	    
-		//model.addAttribute("vuelos", vueloService.obtenerTodosLosVuelos());
+		model.addAttribute("formBean", form);
 
-	    List<Ciudad> ciudades = ciudadService.getAll();
-	    List<String> nombresCiudades = new ArrayList<>();
-	    for (Ciudad ciudad : ciudades) {
-	        nombresCiudades.add(ciudad.getNombre());
-	    }
-	    model.addAttribute("ciudades", nombresCiudades);
-	    
-	    return "listaVuelos";
+		return "vuelosBuscar";
 	}
 
-	
-	
+	@ModelAttribute("ciudades")
+	public List<Ciudad> getAllciudades() {
+		return this.ciudadService.getAll();
+	}
+	@ModelAttribute("vuelos")
+	public List<Vuelo> getAllvuelos() {
+		return this.vueloService.obtenerTodosLosVuelos();
+	}
+
 	@PostMapping("/mostrar")
-	public String mostrarVuelosListadosYFiltrados(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-	                             @RequestParam(required = false) Ciudad origen,
-	                             @RequestParam(required = false) Ciudad destino,
-	                             @RequestParam(required = false) String tipoVuelo,
-	                             Model model) {
+	public String mostrarVuelosListadosYFiltrados(@ModelAttribute("formBean") @Valid VuelosListarForm formBean,
+			BindingResult result, Model model) {
 
-	    List<Vuelo> vuelos = vueloService.filter(origen, destino, tipoVuelo, fecha);
-	    model.addAttribute("vuelos", vuelos);
+		if (result.hasErrors() || formBean.getFecha() == null) {
+			result.rejectValue("fecha", "error.formBean", "La fecha es nula o inválida");
+			model.addAttribute("errores", result.getAllErrors());
+		} else {
 
-	    List<Ciudad> ciudades = ciudadService.getAll();
-	    List<String> nombresCiudades = new ArrayList<>();
-	    for (Ciudad ciudad : ciudades) {
-	        nombresCiudades.add(ciudad.getNombre());
-	    }
-	    model.addAttribute("ciudades", nombresCiudades);
+			List<Vuelo> vuelos = vueloService.filter(formBean);
+			model.addAttribute("resultados", vuelos);
+		}
 
-	    return "listaVuelos";
+		model.addAttribute("formBean", formBean);
+
+		return "vuelosBuscar";
+
 	}
-
-	
-	
 
 }

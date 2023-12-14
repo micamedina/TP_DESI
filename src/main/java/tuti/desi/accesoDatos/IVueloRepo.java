@@ -34,17 +34,5 @@ public interface IVueloRepo extends JpaRepository<Vuelo, Long> {
 
 	List<Vuelo> findByFechaHoraPartidaBetween(LocalDateTime atStartOfDay, LocalDateTime atTime);
 
-	@Query("SELECT v FROM Vuelo v WHERE v.fecha = :fecha " +
-            "AND (v.origen.nombre LIKE %:origen% OR v.destino.nombre LIKE %:destino% OR v.tipoVuelo = :tipoVuelo)")
-    List<Vuelo> findByFechaAndOrigenAndDestinoAndTipoVuelo(
-            @Param("fecha") LocalDate fecha,
-            @Param("origen") String origen,
-            @Param("destino") String destino,
-            @Param("tipoVuelo") String tipoVuelo
-    );
-	
-	
-	
-
-    
+	    
 }
