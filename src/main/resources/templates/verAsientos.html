@@ -17,11 +17,15 @@
 
 			<label for="idAsiento">Seleccione un asiento:</label>
 			<select name="idAsiento" class="form-control" required>
-				<option th:each="asiento : ${asientos}" th:if="${asiento.disponible}" th:value="${asiento.id}" th:text="${asiento.numero}"></option>
+				<option th:each="asiento : ${asientos}" th:if="${asiento.disponible}" th:value="${asiento.id}"
+					th:text="${asiento.numero}"></option>
 			</select>
 
 			<button type="submit" class="btn btn-primary mt-2">Seleccionar Asiento</button>
+
+
 		</form>
+		<a th:href="@{/}" class="btn btn-secondary">Volver</a>
 	</div>
 
 </body>

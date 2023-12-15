@@ -19,5 +19,7 @@ public interface IAsientoRepo extends JpaRepository<Asiento, Long> {
     void actualizarDisponibilidadAsiento(@Param("idAsiento") Long idAsiento, @Param("disponible") boolean disponible);
     
     Optional<Asiento> findById(Long id);
+    
+    List<Asiento> findAllByVueloIdAndDisponibleNot(Long idVuelo, boolean disponible);
 
 }

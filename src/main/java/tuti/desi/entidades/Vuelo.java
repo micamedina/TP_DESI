@@ -47,6 +47,18 @@ public class Vuelo {
 	public List<Asiento> getAsientos() {
 		return asientos;
 	}
+	
+	private int asientosDisponibles;
+	
+	
+
+	public int getAsientosDisponibles() {
+		return asientosDisponibles;
+	}
+
+	public void setAsientosDisponibles(int asientosDisponibles) {
+		this.asientosDisponibles = asientosDisponibles;
+	}
 
 	public void setAsientos(List<Asiento> asientos) {
 		this.asientos = asientos;

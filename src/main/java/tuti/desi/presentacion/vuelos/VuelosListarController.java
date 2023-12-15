@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import tuti.desi.entidades.Ciudad;
 import tuti.desi.entidades.Vuelo;
 import tuti.desi.presentacion.cuidades.CiudadesBuscarForm;
+import tuti.desi.servicios.AsientoService;
 import tuti.desi.servicios.CiudadService;
 import tuti.desi.servicios.VueloService;
 import java.time.LocalDate;
@@ -27,6 +28,9 @@ public class VuelosListarController {
 
 	@Autowired
 	private VueloService vueloService;
+	
+	@Autowired
+	private AsientoService asientoService;
 
 	@Autowired
 	private CiudadService ciudadService;
@@ -60,6 +64,13 @@ public class VuelosListarController {
 		} else {
 
 			List<Vuelo> vuelos = vueloService.filter(formBean);
+			model.addAttribute("resultados", vuelos);
+			
+			for (Vuelo vuelo : vuelos) {
+				vuelo.setAsientosDisponibles(asientoService.countAsientosByVueloIdAndDisponibleNot(vuelo.getId()));
+				vueloService.guardarVuelo(vuelo);
+	            
+	        }
 			model.addAttribute("resultados", vuelos);
 		}
 

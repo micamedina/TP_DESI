@@ -13,5 +13,7 @@ public interface AsientoService {
     void actualizarDisponibilidadAsiento(Long idAsiento, boolean disponible);
     
     Asiento findById(Long idAsiento);
+    
+    public int countAsientosByVueloIdAndDisponibleNot(Long idVuelo);
 
 }

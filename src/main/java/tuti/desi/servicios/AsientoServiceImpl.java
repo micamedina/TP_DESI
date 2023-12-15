@@ -37,6 +37,12 @@ public class AsientoServiceImpl implements AsientoService {
 	public Asiento findById(Long idAsiento) {
         return asientoRepo.findById(idAsiento).orElse(null);
 	}
+	
+	@Override
+	public int countAsientosByVueloIdAndDisponibleNot(Long idVuelo) {
+	    List<Asiento> asientos = asientoRepo.findAllByVueloIdAndDisponibleNot(idVuelo, false);
+	    return asientos.size();
+	}
 
 
 }

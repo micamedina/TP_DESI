@@ -42,7 +42,7 @@ public class VuelosProgramarController {
 	@GetMapping("/programar")
 	public String mostrarFormularioVuelo(Model model) {
 		model.addAttribute("vuelo", new Vuelo());
-		model.addAttribute("aviones", avionServicio.obtenerTodosLosAviones());
+		
 		return "vuelosProgramar";
 	}
 
@@ -50,19 +50,23 @@ public class VuelosProgramarController {
 	public List<Ciudad> getAllciudades() {
 		return this.ciudadServicio.getAll();
 	}
+	@ModelAttribute("aviones")
+	public List<Avion> getAllaviones() {
+		return this.avionServicio.obtenerTodosLosAviones();
+	}
 
 	@PostMapping("/agregar")
 	public String agregarVuelo(@ModelAttribute("vuelo") @Valid Vuelo vuelo, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("ciudades", ciudadServicio.getAll());
-			model.addAttribute("aviones", avionServicio.obtenerTodosLosAviones());
+			
 			return "vuelosProgramar";
 		}
 
 		if (vueloServicio.existeNumeroVuelo(vuelo.getNroVuelo())) {
 			result.rejectValue("nroVuelo", "error.vuelo", "El número de vuelo ya existe");
 			model.addAttribute("ciudades", ciudadServicio.getAll());
-			model.addAttribute("aviones", avionServicio.obtenerTodosLosAviones());
+			
 			return "vuelosProgramar";
 		}
 		
@@ -70,12 +74,12 @@ public class VuelosProgramarController {
 	    if (vueloServicio.existeVueloFechaAvion(vuelo)) {
 	        result.addError(new FieldError("vuelo", "fechaHoraPartida", "Ya existe un vuelo para este avión en la misma fecha"));
 	        model.addAttribute("ciudades", ciudadServicio.getAll());
-	        model.addAttribute("aviones", avionServicio.obtenerTodosLosAviones());
+	        
 	        return "vuelosProgramar";
 	    }
 
-		vueloServicio.guardarVuelo(vuelo);
 		
+	    vueloServicio.guardarVuelo(vuelo);
 		int filas = vuelo.getAvion().getCantidadFilas();
 		int asientosPorFila = vuelo.getAvion().getAsientosPorFila();
 		int totalAsientos = filas*asientosPorFila;
@@ -88,7 +92,9 @@ public class VuelosProgramarController {
 	                asientoService.guardarAsiento(asiento);
 	        
 	        }
-		
+	     
+	     vuelo.setAsientosDisponibles(totalAsientos);
+	     vueloServicio.guardarVuelo(vuelo);
 		
 		return "vuelosProgramar";
 	}

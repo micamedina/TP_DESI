@@ -30,6 +30,8 @@
 			<p>Tasa: $ <span th:text="${tasaPortuaria}"></span></p>
 
 			<p>Precio total: $ <span th:text="${vuelo.precioPasaje + ivaPasaje + tasaPortuaria }"></span></p>
+			
+			<a th:href="@{/}" class="btn btn-secondary">Volver</a>
 
 		</form>
 
